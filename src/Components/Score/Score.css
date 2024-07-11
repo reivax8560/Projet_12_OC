@@ -1,0 +1,35 @@
+.radialbarchart-container {
+  background-color: rgb(235, 235, 235);
+  border-radius: 5px;
+}
+
+.radialbarchart-title {
+  /* background-color: red; */
+  /* color: white; */
+  font-size: 14px;
+  font-weight: bold;
+  /* padding: 10px; */
+  text-align: center;
+}
+
+/* .tooltip {
+  background-color: red;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+.legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgb(120, 120, 120);
+}
+
+.legend-items {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+} */

@@ -1,0 +1,41 @@
+.left-navbar {
+    background-color: black;
+    width: 8%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-navbar nav {
+    margin-top: 150%;
+}
+
+.nav-icon-wrapper {
+    width: 45px;
+    height: 45px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin: 15px auto;
+}
+
+.nav-icons {
+    color: red;
+    font-size: 22px;
+}
+
+.faDumbbell {
+    transform: rotate(45deg);
+}
+
+.Copyright {
+    color: white;
+    transform: rotate(-90deg);
+    text-wrap: nowrap;
+    font-size: 8px;
+    margin-bottom: 90%;
+}

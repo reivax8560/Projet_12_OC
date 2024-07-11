@@ -1,0 +1,51 @@
+.barchart-container {
+  margin-bottom: 20px;
+  background-color: #ebebeb;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.tooltip {
+  background-color: #ff0000;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+.barchart-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 10px 20px 20px 20px;
+}
+
+.barchart-legend-title {
+  color: black;
+}
+
+.barchart-legend-items-block {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+  color: #787878;
+}
+
+.barchart-legend-items-block>p {
+  display: flex;
+  align-items: center;
+}
+
+.blackCircle {
+  color: black;
+  font-size: 8px;
+  margin-right: 10px;
+}
+
+.redCircle {
+  color: red;
+  font-size: 8px;
+  margin-right: 10px;
+}

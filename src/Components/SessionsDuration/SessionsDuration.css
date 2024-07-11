@@ -1,0 +1,26 @@
+p {
+    margin: 0;
+}
+
+.linechart-container {
+    padding: 0;
+    background-color: red;
+    border-radius: 5px;
+}
+
+.sessions-tooltip {
+    background-color: #ffffff;
+    color: black;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+
+.linechart-legend {
+    color: #ffffffc2;
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
