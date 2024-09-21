@@ -1,6 +1,5 @@
 import './Header.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPersonRunning } from "@fortawesome/free-solid-svg-icons";
+import mainIcon from "../../assets/logo.png"
 
 
 function Header() {
@@ -8,12 +7,7 @@ function Header() {
     return (
         <header className='top-navbar'>
 
-            <div className='logo-container'>
-                <div className='logo-wrapper'>
-                    <FontAwesomeIcon icon={faPersonRunning} className='logo' />
-                </div>
-                <h1 className='logo-title'>SportSee</h1>
-            </div>
+            <img className='mainIcon' src={mainIcon} alt='sportsee icon' />
 
             <nav className='nav-bloc'>
                 <div className='nav-items'>Accueil</div>

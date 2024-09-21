@@ -12,30 +12,17 @@ function PerformanceByActivity() {
         const api = new Api()
         api.getUserPerformance()
             .then((datas) => {
-
-                function getKindValue(key) {
-                    for (let property in datas.kind) {
-                        if (property == key) {
-                            return datas.kind[property]
-                        }
-                    }
-                }
-
-                datas.data.map((dataElement) => {
-                    dataElement.kind = getKindValue(dataElement.kind)
-                })
-
-                setUserPerf(datas.data)
+                setUserPerf(datas)
             })
     }, [])
 
 
 
     return (
-        <ResponsiveContainer width='30%' height={260} className={"radarchart-container"}>
+        <ResponsiveContainer width='31%' height={230} className={"radarchart-container"}>
 
             <RadarChart data={userPerf} outerRadius={90} >
-                <PolarGrid />
+                <PolarGrid radialLines={false} />
                 <PolarAngleAxis dataKey="kind" />
                 <Radar dataKey="value" fill="#ff0000" fillOpacity={0.6} />
             </RadarChart>

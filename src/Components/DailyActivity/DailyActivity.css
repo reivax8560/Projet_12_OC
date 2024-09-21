@@ -3,6 +3,13 @@
   background-color: #ebebeb;
   border-radius: 5px;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.barchart-error {
+  font-size: 30px;
 }
 
 .tooltip {

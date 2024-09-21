@@ -1,14 +1,16 @@
 import './App.css'
 import Header from "./Components/Header/Header";
 import SideNavBar from "./Components/SideNavBar/SideNavBar";
-import Title from "./Components/Title/Title";
+import Greeting from "./Components/Greeting/Greeting";
 import DailyActivity from './Components/DailyActivity/DailyActivity';
 import SessionsDuration from './Components/SessionsDuration/SessionsDuration';
 import PerformanceByActivity from './Components/PerformanceByActivity/PerformanceByActivity';
 import Score from './Components/Score/Score';
 import InfoCard from './Components/InfoCard/InfoCard';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFire, faDrumstickBite, faAppleWhole, faBurger } from "@fortawesome/free-solid-svg-icons";
+import fireIcon from "../src/assets/calories-icon.png"
+import chickenIcon from "../src/assets/protein-icon.png"
+import appleIcon from "../src/assets/carbs-icon.png"
+import burgerIcon from "../src/assets/fat-icon.png"
 import { useEffect, useState } from 'react';
 import Api from './api';
 
@@ -20,8 +22,11 @@ function App() {
   useEffect(() => {
     const api = new Api()
     api.getUserMainDatas()
-      .then((datas) => { setMainDatas(datas) })
+      .then((datas) => {
+        setMainDatas(datas)
+      })
   }, [])
+
 
 
   return (
@@ -32,8 +37,7 @@ function App() {
         <SideNavBar />
 
         <div className='secondary-wrapper'>                           {/* BLOC TITRE + GRAPHIQUES + VIGNETTES */}
-          <Title datas={mainDatas.userInfos?.firstName} />
-          {/* <Title datas={mainDatas.userInfos?.firstName} /> */}
+          <Greeting datas={mainDatas.userInfos?.firstName} />
 
           <main className='main-content'>                             {/* BLOC GRAPHIQUES + VIGNETTES */}
             <div className="charts-container">                        {/* BLOC GRAPHIQUES */}
@@ -50,30 +54,13 @@ function App() {
 
             <div className='key-informations'>                        {/* VIGNETTES INFOS CLE */}
 
-              <InfoCard value={mainDatas.keyData?.calorieCount} unit='kCal' type='Calories'>
-                {/* <InfoCard value={mainDatas.keyData?.calorieCount} unit='kCal' type='Calories'> */}
-                <div className='key-icon-wrapper faFire-wrapper'>
-                  <FontAwesomeIcon icon={faFire} className='key-icon faFire' />
-                </div>
-              </InfoCard>
-              <InfoCard value={mainDatas.keyData?.proteinCount} unit='g' type='Proteines'>
-                {/* <InfoCard value={mainDatas.keyData?.proteinCount} unit='g' type='Proteines'> */}
-                <div className='key-icon-wrapper faDrumstickBite-wrapper'>
-                  <FontAwesomeIcon icon={faDrumstickBite} className='key-icon faDrumstickBite' />
-                </div>
-              </InfoCard>
-              <InfoCard value={mainDatas.keyData?.carbohydrateCount} unit='g' type='Glucides'>
-                {/* <InfoCard value={mainDatas.keyData?.carbohydrateCount} unit='g' type='Glucides'> */}
-                <div className='key-icon-wrapper faAppleWhole-wrapper'>
-                  <FontAwesomeIcon icon={faAppleWhole} className='key-icon faAppleWhole' />
-                </div>
-              </InfoCard>
-              <InfoCard value={mainDatas.keyData?.lipidCount} unit='g' type='Lipides'>
-                {/* <InfoCard value={mainDatas.keyData?.lipidCount} unit='g' type='Lipides'> */}
-                <div className='key-icon-wrapper faBurger-wrapper'>
-                  <FontAwesomeIcon icon={faBurger} className='key-icon faBurger' />
-                </div>
-              </InfoCard>
+              <InfoCard value={mainDatas.keyData?.calorieCount} unit='kCal' type='Calories' icon={fireIcon} />
+
+              <InfoCard value={mainDatas.keyData?.proteinCount} unit='g' type='Proteines' icon={chickenIcon} />
+
+              <InfoCard value={mainDatas.keyData?.carbohydrateCount} unit='g' type='Glucides' icon={appleIcon} />
+
+              <InfoCard value={mainDatas.keyData?.lipidCount} unit='g' type='Lipides' icon={burgerIcon} />
 
             </div>
           </main>

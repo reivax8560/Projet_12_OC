@@ -1,7 +1,8 @@
 import './SessionsDuration.css';
 import Api from '../../api';
-import { LineChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Line, Legend } from 'recharts';
+import { LineChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Line, Rectangle } from 'recharts';
 import { useEffect, useState } from 'react';
+
 
 function SessionsDuration() {
 
@@ -10,89 +11,98 @@ function SessionsDuration() {
     useEffect(() => {
         const api = new Api()
         api.getUserSessions()
-            .then((datas) => { setUserSessions(datas.sessions) })
+            .then((datas) => {
+                setUserSessions(datas.sessions)
+            })
     }, [])
 
 
 
     return (
-        <ResponsiveContainer width='30%' height={260} className={"linechart-container"}>
+        <ResponsiveContainer width='31%' height={230} className={"linechart-container"} >
 
-            <LineChart data={userSessions}>
+            <LineChart
+                data={userSessions}
+                style={{ background: "#ff0101", borderRadius: "5px" }}
+                margin={{ top: 70, right: 15, bottom: 10, left: 15 }}
+            >
 
-                <XAxis dataKey="day"
-                    tickLine={false}
-                    axisLine={false}
-                    stroke="#ffffffc2"
-                    tickMargin={10}
-                    height={40}
-                    padding={{ left: 20, right: 20 }}
-                    tickFormatter={(value) => {
-                        let data
-                        switch (value) {
-                            case 1: data = "L"
-                                break
-                            case 2: data = "M"
-                                break
-                            case 3: data = "M"
-                                break
-                            case 4: data = "J"
-                                break
-                            case 5: data = "V"
-                                break
-                            case 6: data = "S"
-                                break
-                            case 7: data = "D"
-                                break
-                            default: data = "?"
-                        }
-                        return data
-                    }}
+                <defs>
+                    <linearGradient id="line-gradient">
+                        <stop offset="0%" stopColor="#ffffff" stopOpacity="30%" />
+                        <stop offset="100%" stopColor="#ffffff" stopOpacity="100%" />
+                    </linearGradient>
+                </defs>
+
+                <text x="10%" y="15%" fontSize="0.8rem" fontWeight={400} width={100} fill="#ffffff" opacity={0.5}>
+                    Durée moyenne des
+                    <tspan x="10%" y="24%">
+                        sessions
+                    </tspan>
+                </text>
+
+                <Line
+                    type="natural"
+                    dataKey="sessionLength"
+                    dot={false}
+                    stroke="url(#line-gradient)"
+                    // unit={"min"}
+                    strokeWidth={2}
+                    activeDot={{ stroke: "#ffffff", strokeOpacity: "30%", strokeWidth: 11, fill: "#ffffff", r: 5 }}
                 />
 
                 <YAxis dataKey="sessionLength"
                     hide={true}
-                    domain={[0, 80]}
+                    domain={["dataMin - 10", "dataMax + 5"]}
                 />
 
-                <Legend
-                    content={() => {
-                        return (
-                            <div className='linechart-legend'>
-                                <p>Durée moyenne des</p>
-                                <p>sessions</p>
-                            </div>
-
-                        )
-                    }}
-                    align='left'
-                    verticalAlign='top'
-                />
-
-                <Line dataKey="sessionLength"
-                    dot={false}
-                    stroke="#ffffffff"
-                    type="bump"     // 'basis' | 'bump' | 'natural' | 'monotone' 
+                <XAxis
+                    dataKey="day"
+                    tickLine={false}
+                    axisLine={false}
+                    stroke="#ffffff"
+                    opacity={0.5}
+                    fontSize="0.8rem"
+                    fontWeight={400}
                 />
 
                 <Tooltip
-                    content={({ active, payload }) => {
-                        if (!active || !payload || payload.length === 0) {
-                            return null
-                        }
-                        return (
-                            <div className='sessions-tooltip'>
-                                <p>{payload[0].value} min</p>
-                            </div>
-                        )
-                    }}
-                // offset={50}
+                    content={<CustomContent />}
+                    cursor={<CustomCursor />}
                 />
 
             </LineChart>
-
         </ResponsiveContainer>
+    );
+}
 
+function CustomContent({ active, payload }) {
+    if (!active || !payload || payload.length === 0) {
+        return null
+    }
+    return (
+        <div className='sessions-tooltip'>
+            <p>{payload[0].value} min</p>
+        </div>
+    )
+}
+
+function CustomCursor({ points }) {
+    // const { x, y } = points[0];
+    return (
+        <Rectangle
+            width={300}
+            height={300}
+            x={points[0].x} // démarre le rectangle à la position x du curseur
+            y={0}
+            fill='black'
+            fillOpacity={0.1}
+        // width={1000}
+        // height={1000}
+        // x={x}
+        // y={y}
+        // points={points}
+        />
     );
 }
 

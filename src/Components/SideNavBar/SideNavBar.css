@@ -1,41 +1,32 @@
-.left-navbar {
+.side-navbar {
     background-color: black;
     width: 8%;
-    height: 90vh;
+    min-height: 780px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.left-navbar nav {
-    margin-top: 150%;
-}
-
-.nav-icon-wrapper {
-    width: 45px;
-    height: 45px;
-    background-color: white;
-    display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
-    margin: 15px auto;
+    position: relative;
+}
+
+.side-navbar nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .nav-icons {
-    color: red;
-    font-size: 22px;
-}
-
-.faDumbbell {
-    transform: rotate(45deg);
+    width: 50px;
+    margin-bottom: 15px;
 }
 
 .Copyright {
     color: white;
     transform: rotate(-90deg);
     text-wrap: nowrap;
+    font-family: "Roboto", sans-serif;
     font-size: 8px;
-    margin-bottom: 90%;
+    position: absolute;
+    bottom: 80px;
 }

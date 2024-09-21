@@ -1,25 +1,19 @@
 import './SideNavBar.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPersonBiking, faPersonSwimming, faDumbbell, faUser, } from "@fortawesome/free-solid-svg-icons";
+import yogaIcon from "../../assets/yoga.png"
+import swimmerIcon from "../../assets/nageur.png"
+import riderIcon from "../../assets/cycliste.png"
+import dumbbellIcon from "../../assets/haltère.png"
 
 
 function SideNavBar() {
 
     return (
-        <div className='left-navbar'>
+        <div className='side-navbar'>
             <nav>
-                <div className='nav-icon-wrapper'>
-                    <FontAwesomeIcon icon={faUser} className='nav-icons' />
-                </div>
-                <div className='nav-icon-wrapper'>
-                    <FontAwesomeIcon icon={faPersonSwimming} className='nav-icons' />
-                </div>
-                <div className='nav-icon-wrapper'>
-                    <FontAwesomeIcon icon={faPersonBiking} className='nav-icons' />
-                </div>
-                <div className='nav-icon-wrapper'>
-                    <FontAwesomeIcon icon={faDumbbell} className='nav-icons faDumbbell' />
-                </div>
+                <img src={yogaIcon} className='nav-icons' alt="yoga Icon" />
+                <img src={swimmerIcon} className='nav-icons' alt="swimmer Icon" />
+                <img src={riderIcon} className='nav-icons' alt="rider Icon" />
+                <img src={dumbbellIcon} className='nav-icons' alt="dumbbell Icon" />
             </nav>
             <p className='Copyright'>Copyright, SportSee 2020</p>
         </div>

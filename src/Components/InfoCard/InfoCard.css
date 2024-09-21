@@ -7,54 +7,14 @@
     border-radius: 5px;
 }
 
-.key-icon-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    width: 50px;
-    height: 50px;
-    margin: 10px;
-}
-
 .key-icon {
-    font-size: 20px;
-}
-
-.faFire-wrapper {
-    background-color: rgb(255, 213, 213);
-}
-
-.faFire {
-    color: red;
-}
-
-.faDrumstickBite-wrapper {
-    background-color: rgb(180, 220, 254);
-}
-
-.faDrumstickBite {
-    color: rgb(36, 153, 255);
-}
-
-.faAppleWhole-wrapper {
-    background-color: rgb(255, 254, 192);
-}
-
-.faAppleWhole {
-    color: rgb(255, 242, 0);
-}
-
-.faBurger-wrapper {
-    background-color: rgb(248, 203, 246);
-}
-
-.faBurger {
-    color: rgb(255, 47, 245);
+    width: 50px;
+    margin: 10px;
 }
 
 .info-wrapper {
     margin: 10px;
+    font-family: "Roboto", sans-serif;
 }
 
 .info-value {
@@ -65,4 +25,5 @@
 .info-type {
     font-size: 12px;
     margin: 5px auto;
+    color: #74798C;
 }

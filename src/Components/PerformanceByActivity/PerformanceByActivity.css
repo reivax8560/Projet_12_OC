@@ -1,4 +1,15 @@
 .radarchart-container {
   background-color: #3d3d3d;
   border-radius: 5px;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+/* .radarchart-container rect {} */
+
+.recharts-polar-angle-axis-tick tspan {
+  /* BRUNO : changer l'aspect du texte des labels */
+  font-size: 12px;
+  fill: white;
+  /* overflow-wrap: anywhere; */
 }

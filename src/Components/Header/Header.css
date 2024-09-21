@@ -7,39 +7,19 @@
     padding: 0 20px;
 }
 
-.logo-container {
-    display: flex;
-}
-
-.logo-wrapper {
-    background-color: red;
-    border-radius: 50%;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.logo {
-    color: black;
-    font-size: 38px;
-}
-
-.logo-title {
-    color: red;
-    font-size: 18px;
-    font-weight: 500;
-    margin-left: 10px;
+.mainIcon {
+    width: 135px;
 }
 
 .nav-bloc {
     display: flex;
     justify-content: space-between;
+    font-family: "Roboto", sans-serif;
 }
 
 .nav-items {
     color: white;
     font-size: 18px;
     font-weight: 500;
-    margin: auto 60px;
+    margin: auto 70px;
 }
