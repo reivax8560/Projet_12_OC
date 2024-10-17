@@ -16,3 +16,4 @@ function InfoCard({ value, unit, type, icon }) {
 
 
 export default InfoCard;
+

@@ -1,41 +1,13 @@
 .radialbarchart-container {
-  background-color: #ebebeb;
+  font-family: "Roboto", sans-serif;
   border-radius: 5px;
-  position: relative;
-}
-
-.radialbarchart-title {
-  font-family: "Roboto", sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  color: black;
-}
-
-.radialbarchart-score {
-  /* width: 60%; */
-  width: 125px;
-  height: 125px;
-  margin: 0 auto;
-  font-family: "Roboto", sans-serif;
-  background-color: #ffffff;
-  border-radius: 50%;
+  box-sizing: border-box;
+  background-color: #ebebeb;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
-.score {
-  font-weight: bold;
-  font-size: 22px;
-  color: black;
-  text-align: center;
-}
-
-.tag {
-  font-size: 14px;
-  color: #74798C;
-  text-align: center;
+.radialbarchart-error {
+  font-size: 20px;
 }

@@ -7,6 +7,10 @@
     border-radius: 5px;
 }
 
+.infocard-error {
+    font-size: 12px;
+}
+
 .key-icon {
     width: 50px;
     margin: 10px;

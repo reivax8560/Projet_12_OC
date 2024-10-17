@@ -2,11 +2,18 @@ p {
     margin: 0;
 }
 
-/* .linechart-container {
-    padding: 0;
-    background-color: #ff0000;
+.linechart-container {
     border-radius: 5px;
-} */
+    box-sizing: border-box;
+    background-color: #ebebeb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.linechart-error {
+    font-size: 20px;
+}
 
 .sessions-tooltip {
     background-color: #ffffff;

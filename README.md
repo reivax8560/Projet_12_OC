@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# Présentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SportSee est une application dédiée au coaching sportif. 
+Ce projet ne présente que la page "profil de l’utilisateur" de l'application, qui va permettre de suivre le nombre de sessions réalisées ainsi que le nombre de calories brûlées.
 
-## Available Scripts
 
-In the project directory, you can run:
+# Technologies utilisées
+
+Ce projet a été créé avec CRA [Create-React-App]
+Environnement d'exécution : [Node.js] v20.14.0
+Gestionnaire de paquets : [npm] 10.7.0
+
+## Dépendances
+
+Librairie graphiques : [recharts]
+
+
+# Commandes
+
+## Back End
+
+Lancer le back : 
+
+### `npm run dev`
+
+stoper le back : 
+
+### `ctrl + c`
+
+
+## Front End
+
+Lancer le front : 
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+stoper le front : 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `ctrl + c`
 
-### `npm test`
+Port de sortie [http://localhost:3000]
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Utilisation de l'application
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Changement d'utilisateur
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+dans le fichier .env le profil utilisateur choisi est déterminé par la variable REACT_APP_USERID.
+il est possible d'utiliser uniquement 2 ID utilisateur : 12 ou 18 
 
-### `npm run eject`
+## Changement de la source des données
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+si REACT_APP_ENVIRONNEMENT=PROD, l'API ira fetcher la BDD, pour toute autre valeur elle utilisera un fichier de données mockées.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Documentation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

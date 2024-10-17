@@ -9,7 +9,7 @@ export default class Api {
 
         if (process.env.REACT_APP_ENVIRONNEMENT === "PROD") {
             try {
-                const response = await fetch(`http://localhost:3000/user/${this.userId}/activity`) // 'activity'
+                const response = await fetch(`http://localhost:3000/user/${this.userId}/activity`)
                 if (!response.ok) {
                     throw new Error(`Erreur ${response.status} : ${response.statusText}`)
                 }
@@ -27,13 +27,24 @@ export default class Api {
 
     async getUserSessions() { /////////////////////////////// SessionsDuration
         if (process.env.REACT_APP_ENVIRONNEMENT === "PROD") {
-            const response = await fetch(`http://localhost:3000/user/${this.userId}/average-sessions`)
-            const result = await response.json()
-            return this.userSessionsFormater(result.data)
+            try {
+                const response = await fetch(`http://localhost:3000/user/${this.userId}/average-sessions`)
+                if (!response.ok) {
+                    throw new Error(`Erreur ${response.status} : ${response.statusText}`)
+                }
+                const result = await response.json()
+                console.log(result.data)
+                return this.userSessionsFormater(result.data)
+            }
+            catch (error) {
+                return error.message
+            }
         }
         else {
             const userAverageSessions = USER_AVERAGE_SESSIONS.find(sessions => sessions.userId == this.userId)
+            console.log(userAverageSessions)
             return this.userSessionsFormater(userAverageSessions)
+            // return userAverageSessions
         }
     }
     userSessionsFormater(datas) {
@@ -62,55 +73,78 @@ export default class Api {
 
     async getUserPerformance() { /////////////////////////////// PerformanceByActivity
         if (process.env.REACT_APP_ENVIRONNEMENT === "PROD") {
-            const response = await fetch(`http://localhost:3000/user/${this.userId}/performance`)
-            const result = await response.json()
-            return this.userPerformanceFormater(result.data)
+            try {
+                const response = await fetch(`http://localhost:3000/user/${this.userId}/performance`)
+                if (!response.ok) {
+                    throw new Error(`Erreur ${response.status} : ${response.statusText}`)
+                }
+                const result = await response.json()
+                // console.log(result.data)
+                return this.userPerformanceFormater(result.data)
+            }
+            catch (error) {
+                return error.message
+            }
         }
         else {
-            const userPerformance = USER_PERFORMANCE.find(perf => perf.userId == this.userId)
-            return this.userPerformanceFormater(userPerformance)
+            const userDatas = USER_PERFORMANCE.find(element => element.userId == this.userId)
+            // console.log(userDatas)
+            return this.userPerformanceFormater(userDatas)
         }
     }
     userPerformanceFormater(datas) {
-        const reversedDatas = datas.data.reverse()  // inversion des données pour affichage dans le bon ordre
+        // inversion de l'ordre des perf pour affichage graphique dans le bon ordre
+        const userPerformances = datas.data.reverse()
 
-        function getKindValue(key) {
-            for (let property in datas.kind) {
-                if (property == key) {
-                    return datas.kind[property]
+        // transforme les types de performance en texte (initialement en nombre)
+        userPerformances.map((performance) => {
+            performance.kind = getKindValue(performance.kind)
+        })
+
+        function getKindValue(kindNumber) {
+            for (let value in datas.kind) {
+                if (value == kindNumber) {
+                    return datas.kind[value]
                 }
             }
         }
 
-        reversedDatas.map((dataElement) => {
-            dataElement.kind = getKindValue(dataElement.kind)
-        })
-
-        reversedDatas.map((dataElement) => {
-            switch (dataElement.kind) {
-                case 'energy': dataElement.kind = "Energie"
+        userPerformances.map((performance) => {
+            switch (performance.kind) {
+                case 'energy': performance.kind = "Energie"
                     break
-                case 'cardio': dataElement.kind = "Cardio"
+                case 'cardio': performance.kind = "Cardio"
                     break
-                case 'endurance': dataElement.kind = 'Endurance'
+                case 'endurance': performance.kind = 'Endurance'
                     break
-                case 'strength': dataElement.kind = "Force"
+                case 'strength': performance.kind = "Force"
                     break
-                case 'speed': dataElement.kind = "Vitesse"
+                case 'speed': performance.kind = "Vitesse"
                     break
-                case 'intensity': dataElement.kind = 'Intensité'
+                case 'intensity': performance.kind = 'Intensité'
                     break
-                default: dataElement.kind = ""
+                default: performance.kind = ""
             }
         })
-        return reversedDatas
+        // console.log(userPerformances)
+        return userPerformances
     }
 
     async getUserMainDatas() { /////////////////////////////// Score + infos user
         if (process.env.REACT_APP_ENVIRONNEMENT === "PROD") {
-            const response = await fetch(`http://localhost:3000/user/${this.userId}`)
-            const result = await response.json()
-            return this.userMainDatasFormater(result.data)
+            try {
+                const response = await fetch(`http://localhost:3000/user/${this.userId}`)
+                if (!response.ok) {
+                    throw new Error(`Erreur ${response.status} : ${response.statusText}`)
+                }
+                const result = await response.json()
+                return this.userMainDatasFormater(result.data)
+                // return [this.userMainDatasFormater(result.data)]
+            }
+            catch (error) {
+                // console.log(typeof (error.message))
+                return error.message
+            }
         }
         else {
             const userMainDatas = USER_MAIN_DATA.find(datas => datas.id == this.userId)

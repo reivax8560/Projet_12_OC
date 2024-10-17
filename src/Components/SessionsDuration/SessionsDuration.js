@@ -12,7 +12,12 @@ function SessionsDuration() {
         const api = new Api()
         api.getUserSessions()
             .then((datas) => {
-                setUserSessions(datas.sessions)
+                if (datas?.sessions) {
+                    setUserSessions(datas.sessions)     // données fetchées
+                }
+                else {
+                    setUserSessions(datas)              // données mockées
+                }
             })
     }, [])
 
@@ -21,57 +26,65 @@ function SessionsDuration() {
     return (
         <ResponsiveContainer width='31%' height={230} className={"linechart-container"} >
 
-            <LineChart
-                data={userSessions}
-                style={{ background: "#ff0101", borderRadius: "5px" }}
-                margin={{ top: 70, right: 15, bottom: 10, left: 15 }}
-            >
+            {typeof userSessions == "string" ?
 
-                <defs>
-                    <linearGradient id="line-gradient">
-                        <stop offset="0%" stopColor="#ffffff" stopOpacity="30%" />
-                        <stop offset="100%" stopColor="#ffffff" stopOpacity="100%" />
-                    </linearGradient>
-                </defs>
+                <div className='linechart-error'>{userSessions}</div>
 
-                <text x="10%" y="15%" fontSize="0.8rem" fontWeight={400} width={100} fill="#ffffff" opacity={0.5}>
-                    Durée moyenne des
-                    <tspan x="10%" y="24%">
-                        sessions
-                    </tspan>
-                </text>
+                :
 
-                <Line
-                    type="natural"
-                    dataKey="sessionLength"
-                    dot={false}
-                    stroke="url(#line-gradient)"
-                    // unit={"min"}
-                    strokeWidth={2}
-                    activeDot={{ stroke: "#ffffff", strokeOpacity: "30%", strokeWidth: 11, fill: "#ffffff", r: 5 }}
-                />
+                <LineChart
+                    data={userSessions}
+                    style={{ background: "#ff0101", borderRadius: "5px" }}
+                    margin={{ top: 70, right: 15, bottom: 10, left: 15 }}
+                >
 
-                <YAxis dataKey="sessionLength"
-                    hide={true}
-                    domain={["dataMin - 10", "dataMax + 5"]}
-                />
+                    <defs>
+                        <linearGradient id="line-gradient">
+                            <stop offset="0%" stopColor="#ffffff" stopOpacity="30%" />
+                            <stop offset="100%" stopColor="#ffffff" stopOpacity="100%" />
+                        </linearGradient>
+                    </defs>
 
-                <XAxis
-                    dataKey="day"
-                    tickLine={false}
-                    axisLine={false}
-                    stroke="#ffffff"
-                    opacity={0.5}
-                    fontSize="0.8rem"
-                    fontWeight={400}
-                />
+                    <text x="10%" y="15%" fontSize="0.8rem" fontWeight={400} width={100} fill="#ffffff" opacity={0.5}>
+                        Durée moyenne des
+                        <tspan x="10%" y="24%">
+                            sessions
+                        </tspan>
+                    </text>
 
-                <Tooltip
-                    content={<CustomContent />}
-                    cursor={<CustomCursor />}
-                />
+                    <Line
+                        type="natural"
+                        dataKey="sessionLength"
+                        dot={false}
+                        stroke="url(#line-gradient)"
+                        // unit={"min"}
+                        strokeWidth={2}
+                        activeDot={{ stroke: "#ffffff", strokeOpacity: "30%", strokeWidth: 11, fill: "#ffffff", r: 5 }}
+                    />
 
-            </LineChart>
+                    <YAxis dataKey="sessionLength"
+                        hide={true}
+                        domain={["dataMin - 10", "dataMax + 5"]}
+                    />
+
+                    <XAxis
+                        dataKey="day"
+                        tickLine={false}
+                        axisLine={false}
+                        stroke="#ffffff"
+                        opacity={0.5}
+                        fontSize="0.8rem"
+                        fontWeight={400}
+                    />
+
+                    <Tooltip
+                        content={<CustomContent />}
+                        cursor={<CustomCursor />}
+                    />
+
+                </LineChart>
+
+            }
         </ResponsiveContainer>
     );
 }

@@ -37,7 +37,8 @@ function App() {
         <SideNavBar />
 
         <div className='secondary-wrapper'>                           {/* BLOC TITRE + GRAPHIQUES + VIGNETTES */}
-          <Greeting datas={mainDatas.userInfos?.firstName} />
+          {/* <Greeting datas={mainDatas.userInfos?.firstName} /> */}
+          <Greeting />
 
           <main className='main-content'>                             {/* BLOC GRAPHIQUES + VIGNETTES */}
             <div className="charts-container">                        {/* BLOC GRAPHIQUES */}
@@ -54,13 +55,20 @@ function App() {
 
             <div className='key-informations'>                        {/* VIGNETTES INFOS CLE */}
 
-              <InfoCard value={mainDatas.keyData?.calorieCount} unit='kCal' type='Calories' icon={fireIcon} />
+              {typeof mainDatas == "string" ?
 
-              <InfoCard value={mainDatas.keyData?.proteinCount} unit='g' type='Proteines' icon={chickenIcon} />
+                <div className='infocard-error'>{mainDatas}</div>
+                :
+                <>
+                  <InfoCard value={mainDatas.keyData?.calorieCount} unit='kCal' type='Calories' icon={fireIcon} />
 
-              <InfoCard value={mainDatas.keyData?.carbohydrateCount} unit='g' type='Glucides' icon={appleIcon} />
+                  <InfoCard value={mainDatas.keyData?.proteinCount} unit='g' type='Proteines' icon={chickenIcon} />
 
-              <InfoCard value={mainDatas.keyData?.lipidCount} unit='g' type='Lipides' icon={burgerIcon} />
+                  <InfoCard value={mainDatas.keyData?.carbohydrateCount} unit='g' type='Glucides' icon={appleIcon} />
+
+                  <InfoCard value={mainDatas.keyData?.lipidCount} unit='g' type='Lipides' icon={burgerIcon} />
+                </>
+              }
 
             </div>
           </main>
