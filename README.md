@@ -1,7 +1,7 @@
 # Présentation
 
 SportSee est une application dédiée au coaching sportif. 
-Ce projet ne présente que la page "profil de l’utilisateur" de l'application, qui va permettre de suivre le nombre de sessions réalisées ainsi que le nombre de calories brûlées.
+Ce projet ne présente que la page "profil de l’utilisateur" de l'application, qui va permettre de visualiser les statistiques des performances sportives réalisées.
 
 
 # Technologies utilisées
@@ -44,16 +44,17 @@ Port de sortie [http://localhost:3000]
 
 # Utilisation de l'application
 
+les différents modes d'utilisation de l'application sont configurables depuis le fichier .env
+
 ## Changement d'utilisateur
 
-dans le fichier .env le profil utilisateur choisi est déterminé par la variable REACT_APP_USERID.
-il est possible d'utiliser uniquement 2 ID utilisateur : 12 ou 18 
+Pour changer de profil utilisateur, il faut modifier la valeur de la variable REACT_APP_USERID.
+il est possible d'utiliser deux ID utilisateur : 12 ou 18 
 
 ## Changement de la source des données
 
-si REACT_APP_ENVIRONNEMENT=PROD, l'API ira fetcher la BDD, pour toute autre valeur elle utilisera un fichier de données mockées.
-
-
-# Documentation
-
+Pour changer de méthode de récupération des données (requête API ou données mockées), il faut modifier la valeur de la variable REACT_APP_ENVIRONNEMENT.
+il est possible d'utiliser deux environnement : 
+- PROD : requête API
+- DEV : récupération des données mockées
 

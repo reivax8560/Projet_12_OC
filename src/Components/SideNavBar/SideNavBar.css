@@ -1,7 +1,8 @@
 .side-navbar {
     background-color: black;
     width: 8%;
-    min-height: 780px;
+    min-height: 710px;
+    max-width: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -4,15 +4,16 @@
 
 .secondary-wrapper {
     width: 92%;
-    padding: 30px 60px;
+    padding: 30px 3% 0 3%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
 }
 
 /***************** BLOC GRAPHIQUES + VIGNETTES *****************/
 .main-content {
     display: flex;
+    justify-content: space-around;
 }
 
 .charts-container {
@@ -34,7 +35,8 @@
 
 /***************** BLOC VIGNETTES *****************/
 .key-informations {
-    /* width: 20%; */
+    width: 20%;
+    min-width: 180px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

@@ -5,10 +5,20 @@
     align-items: center;
     padding: 10px;
     border-radius: 5px;
+    max-width: 200px;
+}
+
+.infocard-bloc-error {
+    background-color: #ebebeb;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    padding: 10px;
 }
 
 .infocard-error {
-    font-size: 12px;
+    font-size: 20px;
+    margin: auto;
 }
 
 .key-icon {

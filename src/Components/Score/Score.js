@@ -1,39 +1,23 @@
 import './Score.css';
-import Api from '../../api';
-import { useEffect, useState } from 'react';
 import { RadialBarChart, RadialBar, ResponsiveContainer } from 'recharts';
 
 
-
-function Score() {
-
-    const [userScore, setUserScore] = useState([])
-
-    useEffect(() => {
-
-        const api = new Api()
-        api.getUserMainDatas()
-            .then((datas) => {
-                // setUserScore([datas]);
-                setUserScore(datas);
-            });
-    }, [])
-
+function Score({ userMainDatas }) {
 
     return (
 
         <ResponsiveContainer width='31%' height={230} className={"radialbarchart-container"}>
 
-            {typeof userScore == "string" ?
+            {typeof userMainDatas == "string" ?
 
-                <div className='radialbarchart-error'>{userScore}</div>
+                <div className='radialbarchart-error'>{userMainDatas}</div>
 
                 :
 
                 <RadialBarChart
                     innerRadius="0%"
                     outerRadius="0%"
-                    data={[userScore]}
+                    data={[userMainDatas]}
                     startAngle={90}
                     endAngle={450}
                 >
@@ -45,15 +29,14 @@ function Score() {
                     <RadialBar
                         data={[{ value: 1 }]}
                         dataKey="value"
-                        barSize={150}   // épaisseur barre
+                        barSize={150}
                         fill="#ffffff"
                     />
                     <RadialBar
                         dataKey="todayScore"
-                        barSize={10}   // épaisseur barre
+                        barSize={10}
                         cornerRadius={5}
                         fill="#FF0000"
-                    // clockWise={true}
                     />
 
                     <text
@@ -69,14 +52,13 @@ function Score() {
                             fontWeight={700}
                             fill="#000000"
                         >
-                            {[userScore][0]?.todayScore * 100}%
+                            {[userMainDatas][0]?.todayScore * 100}%
                         </tspan>
                         <tspan x="50%" y="57%">de votre</tspan>
                         <tspan x="50%" y="67%">objectif</tspan>
                     </text>
 
                 </RadialBarChart>
-
             }
         </ResponsiveContainer >
 

@@ -10,7 +10,6 @@ function PerformanceByActivity() {
 
     useEffect(() => {
         const api = new Api()
-
         api.getUserPerformance()
             .then((datas) => {
                 setUserPerf(datas)
@@ -18,17 +17,16 @@ function PerformanceByActivity() {
     }, [])
 
 
-
     return (
         <ResponsiveContainer width='31%' height={230} className={"radarchart-container"}>
 
             {typeof userPerf == "string" ?
+
                 <div className='radarchart-div-error'>
                     <div className='radarchart-error'>{userPerf}</div>
                 </div>
                 :
-
-                <RadarChart data={userPerf} outerRadius="65%" >  {/* outerRadius pour rétrécir le graph */}
+                <RadarChart data={userPerf} outerRadius="65%" >
 
                     <PolarGrid
                         radialLines={false}
@@ -41,6 +39,7 @@ function PerformanceByActivity() {
 
                     />
                     <Radar dataKey="value" fill="#ff0000" fillOpacity={0.6} />
+
                 </RadarChart>
 
             }

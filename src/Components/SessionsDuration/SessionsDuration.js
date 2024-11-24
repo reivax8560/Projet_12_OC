@@ -22,7 +22,6 @@ function SessionsDuration() {
     }, [])
 
 
-
     return (
         <ResponsiveContainer width='31%' height={230} className={"linechart-container"} >
 
@@ -57,7 +56,6 @@ function SessionsDuration() {
                         dataKey="sessionLength"
                         dot={false}
                         stroke="url(#line-gradient)"
-                        // unit={"min"}
                         strokeWidth={2}
                         activeDot={{ stroke: "#ffffff", strokeOpacity: "30%", strokeWidth: 11, fill: "#ffffff", r: 5 }}
                     />
@@ -83,7 +81,6 @@ function SessionsDuration() {
                     />
 
                 </LineChart>
-
             }
         </ResponsiveContainer>
     );
@@ -101,20 +98,14 @@ function CustomContent({ active, payload }) {
 }
 
 function CustomCursor({ points }) {
-    // const { x, y } = points[0];
     return (
         <Rectangle
             width={300}
             height={300}
-            x={points[0].x} // démarre le rectangle à la position x du curseur
+            x={points[0].x}
             y={0}
             fill='black'
             fillOpacity={0.1}
-        // width={1000}
-        // height={1000}
-        // x={x}
-        // y={y}
-        // points={points}
         />
     );
 }

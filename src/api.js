@@ -1,12 +1,15 @@
-import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from './datas'
+import { USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_MAIN_DATA, USER_PERFORMANCE } from './datas'
+/* eslint eqeqeq: 0 */
 
 export default class Api {
+
     constructor() {
         this.userId = process.env.REACT_APP_USERID
     }
 
-    async getUserActivity() { /////////////////////////////// DailyActivity
+    async getUserActivity() { /////////////////////     Appel données graphique principal
 
+        /////////////////////////////////////////////////////// données fetchées
         if (process.env.REACT_APP_ENVIRONNEMENT === "PROD") {
             try {
                 const response = await fetch(`http://localhost:3000/user/${this.userId}/activity`)
@@ -20,12 +23,16 @@ export default class Api {
                 return error.message
             }
         }
+        ////////////////////////////////////////////////////// données mockées
         else {
             return USER_ACTIVITY.find(activity => activity.userId == this.userId)
         }
     }
 
-    async getUserSessions() { /////////////////////////////// SessionsDuration
+
+    async getUserSessions() { /////////////////////     Appel données graphique durée sessions
+
+        /////////////////////////////////////////////////////// données fetchées
         if (process.env.REACT_APP_ENVIRONNEMENT === "PROD") {
             try {
                 const response = await fetch(`http://localhost:3000/user/${this.userId}/average-sessions`)
@@ -33,22 +40,21 @@ export default class Api {
                     throw new Error(`Erreur ${response.status} : ${response.statusText}`)
                 }
                 const result = await response.json()
-                console.log(result.data)
                 return this.userSessionsFormater(result.data)
             }
             catch (error) {
                 return error.message
             }
         }
+        ////////////////////////////////////////////////////// données mockées
         else {
             const userAverageSessions = USER_AVERAGE_SESSIONS.find(sessions => sessions.userId == this.userId)
-            console.log(userAverageSessions)
             return this.userSessionsFormater(userAverageSessions)
-            // return userAverageSessions
         }
     }
-    userSessionsFormater(datas) {
-        datas.sessions.map((sessionItem) => {
+    userSessionsFormater(datas) { /////////////////     formatage
+        const datas_ = { ...datas };
+        datas_.sessions = datas.sessions.map((sessionItem) => {
             switch (sessionItem.day) {
                 case 1: sessionItem.day = "L"
                     break
@@ -64,14 +70,17 @@ export default class Api {
                     break
                 case 7: sessionItem.day = "D"
                     break
-                default: sessionItem.day = "?"
+                // no default
             }
+            return sessionItem;
         })
-        return datas
+        return datas_;
     }
 
 
-    async getUserPerformance() { /////////////////////////////// PerformanceByActivity
+    async getUserPerformance() { //////////////////     Appel données graphique performances par activité
+
+        /////////////////////////////////////////////////////// données fetchées
         if (process.env.REACT_APP_ENVIRONNEMENT === "PROD") {
             try {
                 const response = await fetch(`http://localhost:3000/user/${this.userId}/performance`)
@@ -79,58 +88,69 @@ export default class Api {
                     throw new Error(`Erreur ${response.status} : ${response.statusText}`)
                 }
                 const result = await response.json()
-                // console.log(result.data)
                 return this.userPerformanceFormater(result.data)
             }
             catch (error) {
                 return error.message
             }
         }
+        ////////////////////////////////////////////////////// données mockées
         else {
             const userDatas = USER_PERFORMANCE.find(element => element.userId == this.userId)
-            // console.log(userDatas)
             return this.userPerformanceFormater(userDatas)
         }
     }
-    userPerformanceFormater(datas) {
-        // inversion de l'ordre des perf pour affichage graphique dans le bon ordre
+    userPerformanceFormater(datas) { //////////////     formatage
+
+        // inversion ordre des perf pour affichage graphique
         const userPerformances = datas.data.reverse()
 
-        // transforme les types de performance en texte (initialement en nombre)
-        userPerformances.map((performance) => {
-            performance.kind = getKindValue(performance.kind)
-        })
-
+        // convertit les kind (nombre) en texte
         function getKindValue(kindNumber) {
             for (let value in datas.kind) {
                 if (value == kindNumber) {
                     return datas.kind[value]
                 }
             }
+            return kindNumber;
         }
 
-        userPerformances.map((performance) => {
-            switch (performance.kind) {
+        const userPerformances_ = userPerformances.map((performance) => {
+
+            const kind = getKindValue(performance.kind);
+
+            // traduit les kind en français
+            switch (kind) {
+                case "Energie":
                 case 'energy': performance.kind = "Energie"
                     break
+                case "Cardio":
                 case 'cardio': performance.kind = "Cardio"
                     break
+                case "Endurance":
                 case 'endurance': performance.kind = 'Endurance'
                     break
+                case "Force":
                 case 'strength': performance.kind = "Force"
                     break
+                case "Vitesse":
                 case 'speed': performance.kind = "Vitesse"
                     break
+                case "Intensité":
                 case 'intensity': performance.kind = 'Intensité'
                     break
                 default: performance.kind = ""
             }
+            return performance;
         })
-        // console.log(userPerformances)
-        return userPerformances
+
+        return userPerformances_;
     }
 
-    async getUserMainDatas() { /////////////////////////////// Score + infos user
+
+    async getUserMainDatas() { ////////////////////     Appel données en-tête + graphique score + vignettes
+
+        /////////////////////////////////////////////////////// données fetchées
         if (process.env.REACT_APP_ENVIRONNEMENT === "PROD") {
             try {
                 const response = await fetch(`http://localhost:3000/user/${this.userId}`)
@@ -139,22 +159,25 @@ export default class Api {
                 }
                 const result = await response.json()
                 return this.userMainDatasFormater(result.data)
-                // return [this.userMainDatasFormater(result.data)]
             }
             catch (error) {
-                // console.log(typeof (error.message))
                 return error.message
             }
         }
+        ////////////////////////////////////////////////////// données mockées
         else {
             const userMainDatas = USER_MAIN_DATA.find(datas => datas.id == this.userId)
             return this.userMainDatasFormater(userMainDatas)
         }
     }
-    userMainDatasFormater(datas) {
+    userMainDatasFormater(datas) { ////////////////     formatage
+
+        // convertit la propriété score en todayScore
         if (datas.score) {
-            datas.todayScore = datas.score
+            datas.todayScore = Number(datas.score);
             delete datas.score
+        } else {
+            datas.todayScore = Number(datas.todayScore);
         }
         return datas
     }

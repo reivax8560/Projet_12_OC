@@ -198,7 +198,7 @@ export const USER_PERFORMANCE = [
         },
         data: [
             {
-                value: 801,
+                value: 80,
                 kind: 1
             },
             {

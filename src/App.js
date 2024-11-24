@@ -33,15 +33,15 @@ function App() {
     <>
       <Header />
 
-      <div className='main-wrapper'>                                  {/* BLOC BANDEAU GAUCHE + PARTIE DROITE */}
+      <div className='main-wrapper'>
         <SideNavBar />
 
-        <div className='secondary-wrapper'>                           {/* BLOC TITRE + GRAPHIQUES + VIGNETTES */}
-          {/* <Greeting datas={mainDatas.userInfos?.firstName} /> */}
-          <Greeting />
+        <div className='secondary-wrapper'>                           {/* EN TETE */}
+          <Greeting userMainDatas={mainDatas} />
 
-          <main className='main-content'>                             {/* BLOC GRAPHIQUES + VIGNETTES */}
-            <div className="charts-container">                        {/* BLOC GRAPHIQUES */}
+          <main className='main-content'>
+            <div className="charts-container">
+
               <div className='primary-chart'>                         {/* GRAPHIQUE PRINCIPAL */}
                 <DailyActivity />
               </div>
@@ -49,27 +49,25 @@ function App() {
               <div className='secondary-charts'>                      {/* GRAPHIQUES SECONDAIRES */}
                 <SessionsDuration />
                 <PerformanceByActivity />
-                <Score />
+                <Score userMainDatas={mainDatas} />
               </div>
             </div>
 
-            <div className='key-informations'>                        {/* VIGNETTES INFOS CLE */}
+            <div className='key-informations'>                        {/* VIGNETTES */}
 
               {typeof mainDatas == "string" ?
 
-                <div className='infocard-error'>{mainDatas}</div>
+                <div className='infocard-bloc-error'>
+                  <div className='infocard-error'>{mainDatas}</div>
+                </div>
                 :
                 <>
                   <InfoCard value={mainDatas.keyData?.calorieCount} unit='kCal' type='Calories' icon={fireIcon} />
-
                   <InfoCard value={mainDatas.keyData?.proteinCount} unit='g' type='Proteines' icon={chickenIcon} />
-
                   <InfoCard value={mainDatas.keyData?.carbohydrateCount} unit='g' type='Glucides' icon={appleIcon} />
-
                   <InfoCard value={mainDatas.keyData?.lipidCount} unit='g' type='Lipides' icon={burgerIcon} />
                 </>
               }
-
             </div>
           </main>
         </div>
